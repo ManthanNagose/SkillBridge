@@ -1,0 +1,396 @@
+/* Small reusable UI primitives. Apply as classes, e.g. <button className="btn btn-primary">. */
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--control-height);
+  padding: 0 var(--space-4);
+  border: var(--border-width) solid transparent;
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+
+  &:disabled,
+  &[aria-disabled='true'] {
+    opacity: var(--opacity-disabled);
+    cursor: not-allowed;
+  }
+
+  &[aria-busy='true'] {
+    cursor: progress;
+  }
+}
+
+.btn-spinner {
+  width: 1em;
+  height: 1em;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: var(--radius-full);
+  animation: btn-spin 0.7s linear infinite;
+}
+
+@keyframes btn-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+
+  &:hover:not(:disabled, [aria-disabled='true']) {
+    background: var(--color-primary-hover);
+    color: var(--color-on-primary);
+  }
+}
+
+.btn-secondary {
+  background: var(--color-surface);
+  border-color: var(--color-border-input);
+  color: var(--color-text);
+
+  &:hover:not(:disabled, [aria-disabled='true']) {
+    background: var(--color-surface-subtle);
+    color: var(--color-text);
+  }
+}
+
+.btn-danger {
+  background: var(--color-danger);
+  color: var(--color-on-primary);
+
+  &:hover:not(:disabled, [aria-disabled='true']) {
+    background: var(--color-danger-hover);
+    color: var(--color-on-primary);
+  }
+}
+
+/* Form fields */
+.label {
+  display: block;
+  margin-bottom: var(--space-1);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+}
+
+.input {
+  display: block;
+  width: 100%;
+  min-height: var(--control-height);
+  padding: var(--space-2) var(--space-3);
+  border: var(--border-width) solid var(--color-border-input);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-text);
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+
+  &::placeholder {
+    color: var(--color-text-muted);
+  }
+
+  &:focus-visible {
+    border-color: var(--color-primary);
+    outline-offset: 0;
+    box-shadow: var(--shadow-focus);
+  }
+
+  &[aria-invalid='true'] {
+    border-color: var(--color-danger);
+  }
+
+  &:disabled {
+    background: var(--color-surface-subtle);
+    opacity: var(--opacity-disabled);
+  }
+}
+
+textarea.input {
+  min-height: 6rem;
+  resize: vertical;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+
+  .label {
+    margin-bottom: 0;
+  }
+}
+
+.field-hint,
+.field-error {
+  margin: 0;
+  font-size: var(--font-size-sm);
+}
+
+.field-hint {
+  color: var(--color-text-muted);
+}
+
+.field-error {
+  color: var(--color-danger);
+}
+
+/* Form error summary, shown above a form after a failed submit. */
+.error-summary {
+  padding: var(--space-4);
+  border: var(--border-width) solid var(--color-danger);
+  border-left-width: 4px;
+  border-radius: var(--radius-md);
+  background: var(--color-danger-soft);
+
+  ul {
+    margin: 0;
+    padding-left: var(--space-5);
+  }
+
+  a {
+    color: var(--color-danger);
+    font-weight: var(--font-weight-semibold);
+  }
+}
+
+.error-summary-title {
+  margin: 0 0 var(--space-2);
+  font-size: var(--font-size-base);
+  color: var(--color-danger);
+}
+
+/* Task status badges. The visible text always names the status, so color is never the only signal. */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 0.125rem var(--space-2);
+  border: var(--border-width) solid transparent;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-base);
+  white-space: nowrap;
+
+  &::before {
+    content: '';
+    width: 0.5em;
+    height: 0.5em;
+    border-radius: var(--radius-full);
+    background: currentColor;
+  }
+}
+
+.status-badge-to-do {
+  background: var(--color-surface-subtle);
+  border-color: var(--color-border);
+  color: var(--color-text-muted);
+}
+
+.status-badge-in-progress {
+  background: var(--color-primary-soft);
+  color: var(--color-primary-hover);
+}
+
+.status-badge-completed {
+  background: var(--color-success-soft);
+  color: var(--color-success);
+}
+
+/* Surfaces */
+.card {
+  background: var(--color-surface);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-surface);
+  padding: var(--space-5);
+}
+
+/* Page-level load error with Try again (SectionError). */
+.section-error {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3) var(--space-4);
+  padding: var(--space-4);
+  border: var(--border-width) solid var(--color-danger);
+  border-left-width: 4px;
+  border-radius: var(--radius-md);
+  background: var(--color-danger-soft);
+
+  p {
+    margin: 0;
+    color: var(--color-danger);
+    font-weight: var(--font-weight-medium);
+  }
+}
+
+/* Loading skeletons. They stay invisible for the first 300 ms, so fast loads
+   don't flicker (PRD section 07). */
+.skeleton {
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-subtle);
+  opacity: 0;
+  animation:
+    skeleton-appear 0s 300ms forwards,
+    skeleton-pulse 1.4s 300ms ease-in-out infinite;
+}
+
+.skeleton-line {
+  display: block;
+  width: 70%;
+  height: 0.875rem;
+}
+
+.skeleton-title {
+  width: 50%;
+  height: 1.125rem;
+}
+
+.skeleton-short {
+  width: 35%;
+}
+
+@keyframes skeleton-appear {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes skeleton-pulse {
+  50% {
+    opacity: 0.55;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: skeleton-appear 0s 300ms forwards;
+  }
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Toasts (ToastProvider). Fixed to the bottom of the screen. */
+.toast-region {
+  position: fixed;
+  right: var(--space-4);
+  bottom: calc(var(--space-4) + env(safe-area-inset-bottom, 0px));
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-2);
+  max-width: calc(100% - 2 * var(--space-4));
+  pointer-events: none;
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin: 0;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-text);
+  color: var(--color-surface);
+  box-shadow: var(--shadow-surface);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  overflow-wrap: anywhere;
+
+  svg {
+    flex-shrink: 0;
+  }
+}
+
+/* Confirmation dialog (ConfirmDialog). */
+.confirm-dialog {
+  width: min(28rem, calc(100% - 2 * var(--space-4)));
+  padding: var(--space-5);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  color: var(--color-text);
+  box-shadow: var(--shadow-surface);
+
+  &::backdrop {
+    background: rgb(16 24 40 / 0.45);
+  }
+}
+
+.confirm-dialog-title {
+  margin: 0 0 var(--space-3);
+  font-size: var(--font-size-h3);
+  overflow-wrap: anywhere;
+}
+
+.confirm-dialog-body p {
+  margin: 0 0 var(--space-5);
+  color: var(--color-text-muted);
+}
+
+.confirm-dialog-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--space-3);
+}
+
+/* Avatar initials (Avatar). Dark text on a neutral background, about 13:1 contrast. */
+.avatar {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-full);
+  background: var(--color-surface-subtle);
+  color: var(--color-text);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1;
+  user-select: none;
+}
+
+.avatar-sm {
+  width: 2rem;
+  height: 2rem;
+  font-size: var(--font-size-xs);
+}
+
+.avatar-md {
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: var(--font-size-sm);
+}
+
+.avatar-lg {
+  width: 4rem;
+  height: 4rem;
+  font-size: var(--font-size-h3);
+}

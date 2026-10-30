@@ -1,0 +1,113 @@
+/* Task detail page. Built on the design tokens; shares header, banner and
+   overdue styles with the project pages (projects.css). */
+
+.task-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  align-self: flex-start;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.task-fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+  gap: var(--space-4) var(--space-5);
+  margin: 0;
+  padding: var(--space-5);
+  background: var(--color-surface);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-surface);
+
+  & > div {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    min-width: 0;
+  }
+
+  dt {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-muted);
+  }
+
+  dd {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2);
+    margin: 0;
+    min-height: var(--control-height);
+    overflow-wrap: anywhere;
+  }
+
+  .task-overdue-flag {
+    margin-left: 0;
+  }
+}
+
+.task-control {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+
+  select {
+    flex: 1 1 10rem;
+    max-width: 16rem;
+  }
+}
+
+.task-saving {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.task-description {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  max-width: 45rem;
+
+  h2 {
+    margin: 0;
+  }
+
+  p {
+    margin: 0;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+}
+
+.task-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.task-edit,
+.task-draft {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+
+  h2,
+  h3,
+  p {
+    margin: 0;
+  }
+
+  p {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+}
+
+.project-title-row h1:focus {
+  outline: none;
+}

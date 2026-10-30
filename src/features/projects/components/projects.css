@@ -1,0 +1,483 @@
+/* Project cards and the Projects list. Built on the design tokens. */
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  & > li {
+    display: flex;
+    min-width: 0;
+  }
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  width: 100%;
+  min-width: 0;
+}
+
+.project-card-title {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.project-meta {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.project-labels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+/* Text labels such as "Owner" or "Archived"; the words carry the meaning, not the color. */
+.project-label {
+  padding: 0.125rem var(--space-2);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-full);
+  background: var(--color-surface-subtle);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-muted);
+  line-height: var(--line-height-base);
+}
+
+.project-label-archived {
+  border-color: transparent;
+  background: var(--color-warning-soft);
+  color: var(--color-warning);
+}
+
+.project-progress {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+
+  progress {
+    width: 100%;
+    height: 0.5rem;
+    border: 0;
+    border-radius: var(--radius-full);
+    background: var(--color-surface-subtle);
+    appearance: none;
+    overflow: hidden;
+
+    &::-webkit-progress-bar {
+      background: var(--color-surface-subtle);
+    }
+
+    &::-webkit-progress-value {
+      background: var(--color-primary);
+    }
+
+    &::-moz-progress-bar {
+      background: var(--color-primary);
+    }
+  }
+}
+
+/* Projects page */
+.projects-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+/* Active / Archived views. Each is its own route, so these are links. */
+.project-views ul {
+  display: flex;
+  gap: var(--space-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-bottom: var(--border-width) solid var(--color-border);
+}
+
+.project-view-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--control-height);
+  padding-inline: var(--space-4);
+  margin-bottom: calc(-1 * var(--border-width));
+  border-bottom: 3px solid transparent;
+  color: var(--color-text-muted);
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--color-text);
+  }
+
+  /* Current view: underline bar, weight and color, so it isn't color alone. */
+  &[aria-current='page'] {
+    border-bottom-color: var(--color-primary);
+    color: var(--color-primary-hover);
+    font-weight: var(--font-weight-semibold);
+  }
+}
+
+.projects-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+
+  p {
+    margin: 0;
+  }
+}
+
+.projects-empty-title {
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Project details: header, banner, summary and tabs */
+.project-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding-block: var(--space-4);
+}
+
+.breadcrumb ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+
+  li + li::before {
+    content: '›';
+    margin-right: var(--space-2);
+  }
+}
+
+.project-title-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+
+  h1 {
+    margin: 0;
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+}
+
+.skeleton-heading {
+  display: block;
+  width: 14rem;
+  max-width: 100%;
+  height: 2rem;
+}
+
+.project-page {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-5);
+
+  & > p {
+    margin: 0;
+  }
+}
+
+.project-page-action {
+  align-self: flex-start;
+}
+
+/* Archived: an icon and words, not color alone. Owners also get Restore project. */
+.project-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border: var(--border-width) solid var(--color-warning);
+  border-left-width: 4px;
+  border-radius: var(--radius-md);
+  background: var(--color-warning-soft);
+  color: var(--color-warning);
+  font-weight: var(--font-weight-semibold);
+
+  p {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin: 0;
+  }
+
+  svg {
+    flex-shrink: 0;
+  }
+
+  .section-error {
+    flex-basis: 100%;
+    font-weight: var(--font-weight-regular);
+  }
+}
+
+.project-summary {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-width: 40rem;
+}
+
+.project-description {
+  margin: 0;
+}
+
+.project-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.project-tab {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  min-width: 0;
+}
+
+.project-tab-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  min-height: var(--control-height);
+
+  h2 {
+    margin: 0;
+  }
+}
+
+.task-table-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+/* Task list: a table on wider screens. */
+.task-table-wrap {
+  overflow-x: auto;
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-surface);
+}
+
+.task-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-size-sm);
+
+  th,
+  td {
+    padding: var(--space-3) var(--space-4);
+    border-bottom: var(--border-width) solid var(--color-border);
+    text-align: left;
+    vertical-align: middle;
+  }
+
+  thead th {
+    background: var(--color-surface-subtle);
+    color: var(--color-text-muted);
+    font-weight: var(--font-weight-semibold);
+    white-space: nowrap;
+  }
+
+  tbody tr:last-child > * {
+    border-bottom: 0;
+  }
+}
+
+.task-table-title {
+  font-weight: var(--font-weight-medium);
+  overflow-wrap: anywhere;
+
+  a {
+    font-size: var(--font-size-base);
+  }
+}
+
+.task-overdue-flag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin-left: var(--space-2);
+  color: var(--color-danger);
+  font-weight: var(--font-weight-semibold);
+  white-space: nowrap;
+}
+
+/* Members */
+.member-list {
+  padding-block: var(--space-2);
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+}
+
+.member-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-4);
+  padding-block: var(--space-3);
+
+  & + & {
+    border-top: var(--border-width) solid var(--color-border);
+  }
+}
+
+.member-identity {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.member-name {
+  font-weight: var(--font-weight-medium);
+}
+
+.member-details {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+}
+
+/* Phones: each task row becomes a stacked card (PRD section 09). */
+@media (max-width: 767px) {
+  .task-table-wrap {
+    overflow: visible;
+    border: 0;
+    background: none;
+    box-shadow: none;
+  }
+
+  .task-table {
+    display: block;
+
+    thead {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+    }
+
+    tbody {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+
+    tr {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+      padding: var(--space-4);
+      border: var(--border-width) solid var(--color-border);
+      border-radius: var(--radius-lg);
+      background: var(--color-surface);
+      box-shadow: var(--shadow-surface);
+    }
+
+    th,
+    td {
+      padding: 0;
+      border: 0;
+    }
+
+    td {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-1) var(--space-2);
+    }
+
+    td::before {
+      content: attr(data-label) ':';
+      min-width: 5.5rem;
+      color: var(--color-text-muted);
+    }
+  }
+
+  .task-overdue-flag {
+    margin-left: 0;
+  }
+}
+
+/* Project form (New project, Settings) */
+.project-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  max-width: 36rem;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+}
+
+.project-form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+/* Settings tab */
+.settings-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+  max-width: 40rem;
+
+  h3,
+  p {
+    margin: 0;
+  }
+
+  .project-form {
+    align-self: stretch;
+  }
+}
+
+.project-tab-header h2:focus {
+  outline: none;
+}
+
+.add-member-form .field {
+  max-width: 24rem;
+}
