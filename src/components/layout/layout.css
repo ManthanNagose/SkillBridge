@@ -1,0 +1,348 @@
+/* Shared layout: AppShell, Sidebar, Header and PageContainer. Built on the design tokens. */
+
+.app-shell {
+  display: grid;
+  grid-template-columns: 15rem minmax(0, 1fr);
+  flex-grow: 1;
+  min-height: 100svh;
+}
+
+.app-shell-no-sidebar {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/* Optional header, then <main>, which fills the remaining height. */
+.app-shell-content {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.app-shell-main {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-width: 0;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+/* Hidden until focused, then shown at the top left (PRD section 09). */
+.skip-link {
+  position: absolute;
+  top: var(--space-2);
+  left: var(--space-2);
+  z-index: 10;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  font-weight: var(--font-weight-semibold);
+  transform: translateY(-200%);
+
+  &:focus {
+    transform: none;
+    color: var(--color-on-primary);
+  }
+}
+
+/* Sidebar */
+.sidebar {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  height: 100svh;
+  padding: var(--space-5) var(--space-3);
+  overflow-y: auto;
+  background: var(--color-surface);
+  border-right: var(--border-width) solid var(--color-border);
+}
+
+.sidebar-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+/* The menu button only appears on narrow screens. */
+.sidebar-toggle {
+  display: none;
+}
+
+.sidebar-brand {
+  padding-inline: var(--space-3);
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--color-primary);
+  }
+}
+
+.sidebar-drawer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  flex-grow: 1;
+}
+
+/* Sits at the bottom of the desktop sidebar. */
+.sidebar-account {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: auto;
+  padding: var(--space-4) var(--space-3) 0;
+  border-top: var(--border-width) solid var(--color-border);
+
+  .btn {
+    width: 100%;
+  }
+}
+
+/* User menu: opens upwards from the bottom of the desktop sidebar. */
+.user-menu {
+  position: relative;
+}
+
+.user-menu-button {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+  min-height: var(--control-height);
+  padding: var(--space-2) var(--space-3);
+  border: var(--border-width) solid transparent;
+  border-radius: var(--radius-md);
+  background: none;
+  color: var(--color-text);
+  font-weight: var(--font-weight-medium);
+  text-align: left;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--color-surface-subtle);
+  }
+
+  &[aria-expanded='true'] {
+    border-color: var(--color-border);
+    background: var(--color-surface-subtle);
+
+    .user-menu-chevron {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.user-menu-name {
+  flex-grow: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.user-menu-chevron {
+  flex-shrink: 0;
+  color: var(--color-text-muted);
+}
+
+.user-menu-panel {
+  position: absolute;
+  bottom: calc(100% + var(--space-2));
+  left: 0;
+  right: 0;
+  z-index: 6;
+  padding: var(--space-2);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-surface);
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
+
+/* Public header (landing and auth pages) */
+.public-header {
+  background: var(--color-surface);
+  border-bottom: var(--border-width) solid var(--color-border);
+}
+
+.public-header-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding-block: var(--space-3);
+}
+
+.public-brand {
+  padding-inline: 0;
+}
+
+.public-header-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3) var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  a:not(.btn) {
+    font-weight: var(--font-weight-medium);
+  }
+}
+
+
+.sidebar-nav ul {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: var(--control-height);
+  padding-inline: var(--space-3);
+  border-radius: var(--radius-md);
+  color: var(--color-text-muted);
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+
+  &:hover {
+    background: var(--color-surface-subtle);
+    color: var(--color-text);
+  }
+
+  /* Active page: shape, weight and color all change, so it isn't shown by color alone. */
+  &[aria-current='page'] {
+    background: var(--color-primary-soft);
+    box-shadow: inset 3px 0 0 var(--color-primary);
+    color: var(--color-primary-hover);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  svg {
+    flex-shrink: 0;
+  }
+}
+
+/* Header */
+.page-header {
+  background: var(--color-surface);
+  border-bottom: var(--border-width) solid var(--color-border);
+}
+
+.page-header-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding-block: var(--space-4);
+
+  h1 {
+    margin: 0;
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+}
+
+/* PageContainer */
+.page-container {
+  width: 100%;
+  max-width: 72rem;
+  margin-inline: auto;
+  padding-inline: var(--space-6);
+}
+
+.page-body {
+  padding-block: var(--space-6);
+}
+
+/* Narrow screens: the sidebar becomes a top bar above the content. */
+@media (max-width: 767px) {
+  .app-shell {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+  }
+
+  /* The sidebar becomes a top bar; its links move into a drawer below it. */
+  .sidebar {
+    position: relative;
+    z-index: 5;
+    height: auto;
+    padding: var(--space-3) var(--space-4);
+    overflow: visible;
+    border-right: 0;
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .sidebar-brand {
+    padding-inline: 0;
+  }
+
+  .sidebar-toggle {
+    display: inline-flex;
+  }
+
+  /* Closed: display: none also removes the drawer from the tab order and the accessibility tree. */
+  .sidebar-drawer {
+    display: none;
+    gap: var(--space-4);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    padding: var(--space-3) var(--space-4);
+    background: var(--color-surface);
+    border-bottom: var(--border-width) solid var(--color-border);
+    box-shadow: var(--shadow-surface);
+
+    &[data-open='true'] {
+      display: flex;
+    }
+  }
+
+  .sidebar-account {
+    padding-inline: 0;
+  }
+
+  /* In the drawer the user menu opens in place, below its button. */
+  .user-menu-panel {
+    position: static;
+    margin-top: var(--space-2);
+    box-shadow: none;
+  }
+
+  .page-container {
+    padding-inline: var(--space-4);
+  }
+
+  .page-body {
+    padding-block: var(--space-5);
+  }
+}

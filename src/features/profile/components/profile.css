@@ -1,0 +1,63 @@
+/* Profile page. Built on the design tokens. */
+
+.profile-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  max-width: 36rem;
+}
+
+.profile-avatar-skeleton {
+  display: block;
+  width: 4rem;
+  height: 4rem;
+  border-radius: var(--radius-full);
+}
+
+.profile-identity {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  min-width: 0;
+}
+
+.profile-identity-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+
+  p {
+    margin: 0;
+    overflow-wrap: anywhere;
+  }
+}
+
+.profile-name {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-semibold);
+}
+
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.profile-readonly {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin: 0;
+
+  dt {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  dd {
+    margin: 0;
+    color: var(--color-text-muted);
+    overflow-wrap: anywhere;
+  }
+}
